@@ -90,10 +90,13 @@ export const useAuthStore = create((set, get) => ({
     if (!authUser || get().socket?.connected) return;
 
     const socket = io(BASE_URL, {
+      withCredentials: true, // Allow cookies for authentication
+      transports: ["websocket"], // Force WebSocket transport
       query: {
-        userId: authUser._id,
+        userId: authUser._id, // Send userId in query params
       },
     });
+
     socket.connect();
 
     set({ socket: socket });
