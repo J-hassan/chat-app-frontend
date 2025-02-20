@@ -101,7 +101,7 @@ const LoginPage = () => {
                 "Sign in"
               )}
             </button>
-            <button className="btn btn-primary w-full"> onClick={handleMe}
+            <button className="btn btn-primary w-full" onClick={handleMe}>
               Check Me
             </button>
           </form>

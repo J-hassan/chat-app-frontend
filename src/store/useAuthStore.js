@@ -32,8 +32,10 @@ export const useAuthStore = create((set, get) => ({
   me: async () => {
     try {
       const res = await axiosInstance.get("/auth/me");
+      set({ authUser: res.data });
       set({ isMe: true });
       toast.success("Fronted me success");
+      console.log(res.data);
     } catch (error) {
       console.log("Error in me", error);
     }
