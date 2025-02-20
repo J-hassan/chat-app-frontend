@@ -3,10 +3,7 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:5001"
-    : "https://chat-app-backend-three-xi.vercel.app";
+const BASE_URL = "https://chat-app-backend-three-xi.vercel.app";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
@@ -16,6 +13,7 @@ export const useAuthStore = create((set, get) => ({
   isCheckingAuth: true,
   onlineUsers: [],
   socket: null,
+  isMe: false,
 
   checkAuth: async () => {
     try {
@@ -28,6 +26,16 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: null });
     } finally {
       set({ isCheckingAuth: false });
+    }
+  },
+
+  me: async () => {
+    try {
+      const res = await axiosInstance.get("/auth/me");
+      set({ isMe: true });
+      toast.success("Fronted me success");
+    } catch (error) {
+      console.log("Error in me", error);
     }
   },
 

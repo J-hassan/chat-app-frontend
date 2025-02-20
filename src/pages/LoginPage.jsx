@@ -12,10 +12,16 @@ const LoginPage = () => {
   });
   const { login, isLoggingIn } = useAuthStore();
 
+  const { me, isMe } = useAuthStore();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     login(formData);
   };
+
+  const handleMe = async () => {
+    me();
+  }
 
   return (
     <div className="h-screen grid lg:grid-cols-2">
@@ -94,6 +100,9 @@ const LoginPage = () => {
               ) : (
                 "Sign in"
               )}
+            </button>
+            <button className="btn btn-primary w-full"> onClick={handleMe}
+              Check Me
             </button>
           </form>
 
